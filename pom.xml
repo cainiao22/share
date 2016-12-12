@@ -13,6 +13,28 @@
         <slf4j.version>1.7.7</slf4j.version>
         <scala.maven.version>2.11.1</scala.maven.version>
     </properties>
+
+    <repositories>
+        <repository>
+            <id>scalaz</id>
+            <name>scalaz</name>
+            <url>http://dl.bintray.com/scalaz/releases</url>
+        </repository>
+        <repository>
+            <id>mvnrepository</id>
+            <name>Derbysoft Release Repository</name>
+            <url>http://search.maven.org/remotecontent?filepath=</url>
+        </repository>
+
+
+        <repository>
+            <id>jahia</id>
+            <name>mvnrepository</name>
+            <url>http://maven.jahia.org/maven2</url>
+        </repository>
+
+    </repositories>
+
     <dependencies>
         <dependency>
             <groupId>org.scala-lang</groupId>
@@ -22,16 +44,30 @@
         </dependency>
         <dependency>
             <groupId>org.scala-lang</groupId>
+            <artifactId>scala-actors</artifactId>
+            <version>${scala.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.scala-lang</groupId>
             <artifactId>scala-compiler</artifactId>
             <version>${scala.version}</version>
             <scope>compile</scope>
         </dependency>
-
+        <dependency>
+            <groupId>com.typesafe.akka</groupId>
+            <artifactId>akka-actor_2.10</artifactId>
+            <version>2.3.6</version>
+        </dependency>
         <dependency>
             <groupId>org.specs2</groupId>
             <artifactId>specs2_2.11</artifactId>
             <version>2.4.6</version>
             <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>5.1.18</version>
         </dependency>
     </dependencies>
     <build>
@@ -58,9 +94,6 @@
                         </goals>
                     </execution>
                 </executions>
-                <configuration>
-                    <scalaVersion>${scala.version}</scalaVersion>
-                </configuration>
             </plugin>
         </plugins>
     </build>

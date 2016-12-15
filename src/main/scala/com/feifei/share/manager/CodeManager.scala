@@ -59,15 +59,7 @@ object CodeManager {
   def updateCapitalInit():Unit = {
     val sb:StringBuffer = new StringBuffer()
     for(i:Int <- 1 to 2829){
-      var code:String = ""
-      if(i < 10)
-        code = "00000" + i
-      else if(i < 100)
-        code = "0000" + i
-      else if(i < 1000)
-        code = "000" + i
-      else if(i < 10000)
-        code = "00" + i
+      val code:String = "%6d".format(i)
       sb.append("sz").append(code).append(",")
       getDataAndInsert(sb, 1)
     }

@@ -19,9 +19,24 @@ object CodeManager {
 
   val sql_insert = "insert into t_code(code, total_capital, flow_capital, flag) values (?, ?, ?, ?)"
 
+  val sql_lost = "select code from t_code where code not in (SELECT code FROM t_share_capital where date=?)"
+
   def getCodeList():List[String] = {
     val connection = DBUtil.getConnection;
     val statement = connection.prepareStatement(sql_select);
+    val result = statement.executeQuery();
+    var list = List[String]();
+    while(result.next()){
+      list = result.getString(1)::list;
+    }
+    DBUtil.closeConnection(connection, statement, result);
+    list;
+  }
+
+  def getLostCodeList(date:String):List[String] = {
+    val connection = DBUtil.getConnection;
+    val statement = connection.prepareStatement(sql_lost);
+    statement.setString(1, date)
     val result = statement.executeQuery();
     var list = List[String]();
     while(result.next()){

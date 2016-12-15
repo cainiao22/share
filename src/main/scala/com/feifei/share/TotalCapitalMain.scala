@@ -11,6 +11,7 @@ object TotalCapitalMain {
     //CodeManager.updateCapital()
 
     ShareCapitalManager.insertData()
+    //ShareCapitalManager.insertDataLost("20161215")
     ShareCustomManager.insertData()
   }
 

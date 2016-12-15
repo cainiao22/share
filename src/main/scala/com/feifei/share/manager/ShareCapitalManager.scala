@@ -14,9 +14,27 @@ object ShareCapitalManager {
 
   //val sql_insert_sz = "insert into t_share_capital_sz(code, date, inflow, outflow, net_inflow) values (?, ?, ?, ?, ?)"
 
+  val sql_getLost = "SELECT code FROM t_share_capital where date='20161215' and `code` not in (select code from t_share_capital where date='20161214')"
 
   def insertData(): Unit = {
     val codeList = CodeManager.getCodeList()
+    val sb = new StringBuffer()
+    var i = 0
+    for(code <- codeList){
+      sb.append("ff_").append(code).append(",")
+      i = i + 1
+      if(i % 1 == 0){
+        getAndInsert(sb)
+        sb.setLength(0)
+      }
+    }
+    if(sb.length() > 0){
+      getAndInsert(sb)
+    }
+  }
+
+  def insertDataLost(date:String): Unit ={
+    val codeList = CodeManager.getLostCodeList(date)
     val sb = new StringBuffer()
     var i = 0
     for(code <- codeList){
